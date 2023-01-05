@@ -1,0 +1,107 @@
+{
+  "consumer": {
+    "name": "Our API Consumer"
+  },
+  "interactions": [
+    {
+      "description": "A GET request to retrieve a user",
+      "providerStates": [
+        {
+          "name": "user with ID 3 exists"
+        }
+      ],
+      "request": {
+        "headers": {
+          "Accept": "application/json"
+        },
+        "method": "GET",
+        "path": "/api/users/3"
+      },
+      "response": {
+        "body": {
+          "id": 3,
+          "name": "Jack Smith",
+          "type": "Admin",
+          "version": "V2"
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {}
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "A GET request to retrieve all users",
+      "providerStates": [
+        {
+          "name": "users exist"
+        }
+      ],
+      "request": {
+        "headers": {
+          "Accept": "application/json"
+        },
+        "method": "GET",
+        "path": "/api/users/"
+      },
+      "response": {
+        "body": [
+          {
+            "id": 3,
+            "name": "Jack Smith",
+            "type": "Admin",
+            "version": "V2"
+          },
+          {
+            "id": 8,
+            "name": "John Doe",
+            "type": "Moderator",
+            "version": "V1"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {}
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pactRust": {
+      "ffi": "0.3.11",
+      "models": "0.4.5"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "Our API Provider"
+  }
+}
